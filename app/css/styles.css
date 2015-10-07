@@ -1,0 +1,20 @@
+.text-area {
+  position:fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  width:99%;
+  background-color:#353b45;
+  color:#ffffff;
+  font-size: 15px;
+  padding: 5px;
+}
+
+.notification-label {
+  z-index:100;
+  position:absolute;
+  bottom:0;
+  color: #f3f3f4;
+  left: 50%;
+}
