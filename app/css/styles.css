@@ -5,6 +5,7 @@
   left:0;
   right:0;
   width:99%;
+  height: 93%;
   background-color:#353b45;
   color:#ffffff;
   font-size: 15px;
@@ -15,6 +16,13 @@
   z-index:100;
   position:absolute;
   bottom:0;
-  color: #f3f3f4;
+  color: #323232;
   left: 50%;
+}
+
+.hint-label {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  color: #323232;
 }

@@ -1,6 +1,7 @@
 var file = require('file.js');
 var gui = require('nw.gui');
 
+var title = "JEMP Editor";
 var currentFile;
 
 function clickInput(id) {
@@ -11,23 +12,20 @@ function clickInput(id) {
 
 document.addEventListener('keyup', function (e) {
   if (e.keyCode == 'O'.charCodeAt(0) && e.ctrlKey) {
-    clickInput('open');
+    openFile();
   } else if (e.keyCode == 'S'.charCodeAt(0) && e.ctrlKey) {
-    if(currentFile) {
-      file.save(currentFile, document);
-      showNotification('Changes Saved');
-    } else {
-      clickInput('save');
-    }
+    saveFile();
   } else if (e.keyCode == 'N'.charCodeAt(0) && e.ctrlKey) {
     gui.Window.open('index.html');
   }
 });
 
 onload = function () {
+  setTitle(title + " - Untitled");
   document.getElementById('open').addEventListener('change', function (e) {
     file.open(this.value, document);
     currentFile = this.value;
+    setTitle(title + " - " + this.value);
   });
 
   document.getElementById('save').addEventListener('change', function (e) {
@@ -41,10 +39,26 @@ function showNotification (message) {
   notificationLabel.style.display = "block";
   setTimeout(function () {
     notificationLabel.style.display = "none";
-  }, 1000);
+  }, 2000);
 }
 
-// File Menu
+function setTitle (title) {
+  document.title = title;
+}
+
+function saveFile () {
+  if(currentFile) {
+    file.save(currentFile, document);
+    showNotification('Changes Saved');
+  } else {
+    clickInput('save');
+  }
+}
+
+function openFile () {
+  clickInput('open');
+}
+ // File Menu
 
 var menu = new gui.Menu({type: 'menubar'});
 menu.append(new gui.MenuItem( {
@@ -53,9 +67,16 @@ menu.append(new gui.MenuItem( {
 }));
 
 menu.items[0].submenu.append(new gui.MenuItem({
-  label: 'New',
+  label: 'Open',
   click: function () {
-    gui.Window.open('index.html');
+    openFile();
+  }
+}));
+
+menu.items[0].submenu.append(new gui.MenuItem({
+  label: 'Save',
+  click: function () {
+    saveFile();
   }
 }));
 
