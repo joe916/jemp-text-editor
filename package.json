@@ -1,5 +1,5 @@
 {
 	"name": "jemp-text-editor",
 	"main": "./app/index.html",
-	"window": { "toolbar": false }
+	"window": {}
 }
